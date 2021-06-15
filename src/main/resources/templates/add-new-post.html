@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new post</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css" Type="text/css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+        <a class="navbar-brand" href="#">Facebook</a>
+    </nav>
+    <br>
+
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                <h1 class = "text-center">Add New Post</h1>
+                <div class = "card-body">
+                    <form th:action="@{/new/post}" method="post" >
+
+                        <div class = "form-group">
+                            <label>Post text:</label>
+                            <input type="text"
+                                   name="postText"
+                                   class = "form-control"
+                            />
+                        </div>
+
+                        <hr style="background-color:blue">
+
+                        <div class = "form-group">
+                            <label>Image url:</label>
+                            <input type="url"
+                                   name="url"
+                                   class = "form-control"
+                            />
+                        </div>
+
+                        <br>
+                        <br>
+                        <div class = "box-footer">
+                            <input type="submit" class="btn btn-primary" value="Post"/>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

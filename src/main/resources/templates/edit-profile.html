@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css" Type="text/css">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <a class="navbar-brand" href="#">Facebook</a>
+</nav>
+<br>
+<div class = "container">
+    <div class = "row">
+        <div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class = "text-center">Edit Profile</h1>
+            <div class = "card-body">
+                <form th:action="@{/edit/profile}" method="post" enctype="multipart/form-data">
+
+                    <div class = "form-group">
+                        <label>Your avatar:</label>
+                        <input type="file"
+                               name="fileImage"
+                               id="fileImage"
+                               accept="image/png, image/jpeg"
+                               th:text="@{${image.getUrl()}}"
+                        />
+                        <p> <img th:src="@{${image.getUrl()}}" alt="Avatar" height="200"> </p>
+                        <input type="submit"
+                               value="Upload"
+                               class="btn btn-dark"
+                        />
+                    </div>
+
+                    <hr style="background-color:blue">
+
+                    <div class = "form-group">
+                        <label>Your full name:</label>
+                        <input type="text"
+                               name="userFullName"
+                               class = "form-control"
+                               th:value="${profile.getUserFullName()}"
+
+                        />
+                    </div>
+
+                    <hr style="background-color:blue">
+
+                    <div class = "form-group">
+                        <label>Who can see my full name:</label>
+                        <br>
+                        <input  type="radio"
+                                name="isFullNamePublic"
+                                value="1"
+                                th:checked="${profile.getFullNamePublic()}"
+                        />All users
+                        <input  type="radio"
+                                name="isFullNamePublic"
+                                value="0"
+                                th:checked="${profile.getFullNamePublic()}"
+                        />Only me
+
+                    </div>
+
+                    <hr style="background-color:blue">
+
+                    <div class = "form-group">
+                        <label>Your other info:</label>
+                        <input type="text"
+                               name="otherInfo"
+                               class = "form-control"
+                               th:value="${profile.getOtherInfo()}"
+                        />
+                    </div>
+
+                    <br>
+                    <br>
+                    <div class = "box-footer">
+                        <input type="submit" class="btn btn-primary" value="Update"/>
+                    </div>
+
+                    <hr style="background-color:blue">
+
+                    <div class = "form-group">
+                        <label style="color:red">Change password:</label>
+                        <br>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/change/password}" type="button" class="btn btn-danger">Change password</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

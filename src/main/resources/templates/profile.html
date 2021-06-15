@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css" Type="text/css">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <a class="navbar-brand" href="#">Facebook</a>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class = "nav-link" th:href="@{/new/post}">Add new post</a>
+            </li>
+            <li class="nav-item">
+                <a class = "nav-link" th:href="@{/edit/profile}">Edit profile</a>
+            </li>
+            <li class="nav-item">
+                <a class = "nav-link" th:href="@{/logout}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+
+<div class="profileInfo">
+    <h1>Profile information:</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 img">
+            <img src="https://i.imgur.com/T1AMAhF.png"  alt="img" class="img-rounded" height="200"/>
+            <p th:text="@{${image.getUrl()}}"></p>
+        </div>
+        <div class="col-md-6 details">
+            <blockquote>
+                <h5 th:text="${profile.getUserFullName()}"></h5>
+                <small><cite title="Source Title" th:text="${profile.getOtherInfo()}">  <i class="icon-map-marker"></i></cite></small>
+            </blockquote>
+            <p th:text="${user.getEmail()}"> <br>
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr style="background-color:blue">
+
+<div class="profileInfo">
+    <h1>Your Posts:</h1>
+</div>
+
+<th:block th:each="post : ${posts}">
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="box box-widget">
+                    <div class="box-header with-border">
+                        <div class="user-block">
+                            <img class="img-circle" src="https://img.icons8.com/color/36/000000/guest-male.png" alt="User Image">
+                            <span class="username"><a href="#" data-abc="true" th:text="${profile.getUserFullName()}"></a></span>
+                            <span class="description" th:text="${post.getPostDate()}"></span>
+                        </div>
+                        <div class="box-tools">
+                            <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
+                                <i class="fa fa-circle-o"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button> <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <p th:text="${post.getPostText()}"></p>
+                        <img class="img-responsive pad" th:src="@{${post.getImage().getUrl()}}" alt="Photo">
+                        <span class="pull-right text-muted">0 likes - 0 comments</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</th:block>
+</body>
+</html>

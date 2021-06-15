@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css" Type="text/css">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <a class="navbar-brand" href="#">Facebook</a>
+</nav>
+<br>
+<br>
+<div sec:authorize="!isAuthenticated()" class = "container">
+    <h1>Welcome to facebook!</h1>
+    <br>
+    <br>
+    <div class = "row">
+        <div class = "col-lg-3">
+            <a sec:authorize="!isAuthenticated()" th:href="@{/register}" type="button" class="btn btn-primary">Registration</a>
+            <a sec:authorize="!isAuthenticated()" th:href="@{/login}" type="button" class="btn btn-primary">Login</a>
+        </div>
+    </div>
+    <div class = "facebookImg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1365px-Facebook_f_logo_%282019%29.svg.png" height="300"/>
+    </div>
+</div>
+</body>
+</html>
